@@ -1,0 +1,14 @@
+# OSX generated files
+.DS_Store
+
+# Google App Engine generated folder
+appengine-generated/
+
+# Local IDE generated files
+.idea/
+.cache/
+.local/
+*.pyc
+
+# lib directory (Comment if lib should be committed to git history)
+lib/
