@@ -18,10 +18,14 @@ class Users(BaseResource):
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
-        if state is None:
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
+        if not state:
             raise ValueError("state is a required field")
+        if not isinstance(state, basestring):
+            raise TypeError("state should be type string, got {}".format(type(state)))
 
         if type(params) is not dict:
             raise TypeError("params must be None or type dict")
@@ -43,14 +47,18 @@ class Users(BaseResource):
         :param event: REQUIRED The name of the event
         :param info: Any info attached to the event
         :param params: A flat object of parameters as key-value pairs.
-        :param create_disposition:The policy that determines whether users are created by the API. Default: CreateNever
+        :param create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
-        if event is None:
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
+        if not event:
             raise ValueError("event is a required field")
+        if not isinstance(event, basestring):
+            raise TypeError("event should be type string, got {}".format(type(event)))
 
         if type(params) is not dict:
             raise TypeError("params must be None or type dict")
@@ -70,12 +78,14 @@ class Users(BaseResource):
 
         :param user_id: REQUIRED The current user ID
         :param attributes: A map of user attributes as key-value pairs.
-        :param create_disposition:The policy that determines whether users are created by the API. Default: CreateNever
+        :param create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
 
         if type(attributes) is not dict:
             raise ValueError("SetUserAttributes attributes param must be of type dict")
@@ -86,3 +96,36 @@ class Users(BaseResource):
             "createDisposition": create_disposition
         }
         return self._client.request('POST', 'setUserAttributes', params)
+
+    def increment_user_attribute(self, user_id, attribute, incr=1, create_disposition=disposition.CREATE_NEVER):
+        """
+        https://docs.leanplum.com/reference#post_api-action-setuserattributes
+
+        :param user_id: REQUIRED The current user ID
+        :param attribute: REQUIRED The name of the attribute to increment
+        :param incr: The value to increment by.  Default is 1
+        :param create_disposition:The policy that determines whether users are created by the API. Default: CreateNever
+        :return: The response from Leanplum api
+        """
+
+        if not user_id:
+            raise ValueError("user_id is a required field")
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
+
+        if not attribute:
+            raise ValueError("attribute is a required field")
+        if not isinstance(attribute, basestring):
+            raise TypeError("attribute should be type string, got {}".format(type(attribute)))
+        if not isinstance(incr, int):
+            raise TypeError("incr should be type int, got {}".format(type(incr)))
+
+        params = {
+            "userId": user_id,
+            "userAttributeValuesToIncrement": {
+                attribute: incr
+            },
+            "createDisposition": create_disposition
+        }
+
+        self._client.request('POST', 'setUserAttributes', params)
