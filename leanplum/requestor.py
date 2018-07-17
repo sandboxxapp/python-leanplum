@@ -3,7 +3,7 @@ import platform
 import urllib
 
 import leanplum
-from leanplum import errors, http_client, logger, version
+from leanplum import errors, http_client, logger
 
 
 class ApiRequestor(object):
@@ -102,10 +102,10 @@ class ApiRequestor(object):
             return errors.APIError(message, rbody, rcode)
 
     def _request_headers(self, method):
-        user_agent = 'Leanplum/v1 PythonBindings/%s' % (version.VERSION,)
+        user_agent = 'Leanplum/v1 PythonBindings/%s' % (leanplum.__version__,)
 
         ua = {
-            'bindings_version': version.VERSION,
+            'bindings_version': leanplum.__version__,
             'lang': 'python',
             'publisher': 'sandboxx/leanplum',
             'httplib': self._client.name,
