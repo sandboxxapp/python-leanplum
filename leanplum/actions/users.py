@@ -18,10 +18,14 @@ class Users(BaseResource):
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
-        if state is None:
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
+        if not state:
             raise ValueError("state is a required field")
+        if not isinstance(state, basestring):
+            raise TypeError("state should be type string, got {}".format(type(state)))
 
         if type(params) is not dict:
             raise TypeError("params must be None or type dict")
@@ -47,10 +51,14 @@ class Users(BaseResource):
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
-        if event is None:
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
+        if not event:
             raise ValueError("event is a required field")
+        if not isinstance(event, basestring):
+            raise TypeError("event should be type string, got {}".format(type(event)))
 
         if type(params) is not dict:
             raise TypeError("params must be None or type dict")
@@ -74,8 +82,10 @@ class Users(BaseResource):
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
 
         if type(attributes) is not dict:
             raise ValueError("SetUserAttributes attributes param must be of type dict")
@@ -98,11 +108,13 @@ class Users(BaseResource):
         :return: The response from Leanplum api
         """
 
-        if user_id is None:
+        if not user_id:
             raise ValueError("user_id is a required field")
-        if attribute is None:
-            raise ValueError("attribute is a required field")
+        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
+            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
 
+        if not attribute:
+            raise ValueError("attribute is a required field")
         if not isinstance(attribute, basestring):
             raise TypeError("attribute should be type string, got {}".format(type(attribute)))
         if not isinstance(incr, int):
