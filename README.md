@@ -16,6 +16,11 @@ client.users.track(1234, "custom event")
 client.users.advance(1234, "Registered")
 # set user attributes
 client.users.set_user_attributes(1234, {"custom_param": "value"})
+# increment attribute
+client.users.increment_user_attribute(1234, "Page Views", incr=1)
+
+# delete user
+client.admin.delete_user(1234)
 ```
 
 This wrapper uses the [python-requests](https://github.com/requests/requests) library.  Currently, we don't have a need
