@@ -1,5 +1,7 @@
 from leanplum.actions.abstract import BaseResource
 
+__all__ = ['Admin']
+
 
 class Admin(BaseResource):
 
