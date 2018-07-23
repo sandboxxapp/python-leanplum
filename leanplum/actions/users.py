@@ -11,10 +11,10 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-advance
 
         :param user_id: REQUIRED The current user ID
-        :param state: REQUIRED The name of the state
-        :param info: Any info attached to the state.
-        :param params: A flat object of parameters as key-value pairs.
-        :param create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
+        :param str, state: REQUIRED The name of the state
+        :param str info: Any info attached to the state.
+        :param dict params: A flat object of parameters as key-value pairs.
+        :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 
@@ -44,10 +44,10 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-track
 
         :param user_id: REQUIRED The current user ID
-        :param event: REQUIRED The name of the event
-        :param info: Any info attached to the event
-        :param params: A flat object of parameters as key-value pairs.
-        :param create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
+        :param str event: REQUIRED The name of the event
+        :param str info: Any info attached to the event
+        :param dict params: A flat object of parameters as key-value pairs.
+        :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 
@@ -77,8 +77,8 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
         :param user_id: REQUIRED The current user ID
-        :param attributes: A map of user attributes as key-value pairs.
-        :param create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
+        :param dict attributes: A map of user attributes as key-value pairs.
+        :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 
@@ -102,9 +102,9 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
         :param user_id: REQUIRED The current user ID
-        :param attribute: REQUIRED The name of the attribute to increment
-        :param incr: The value to increment by.  Default is 1
-        :param create_disposition:The policy that determines whether users are created by the API. Default: CreateNever
+        :param str attribute: REQUIRED The name of the attribute to increment
+        :param int incr: The value to increment by.  Default is 1
+        :param str create_disposition:The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
 

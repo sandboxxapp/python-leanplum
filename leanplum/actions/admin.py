@@ -10,7 +10,7 @@ class Admin(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
         :param user_id: REQUIRED The current user ID
-        :param full_erasure:
+        :param bool full_erasure:
         :return: If True, deletes all session and analytics data for the selected user (set True
         for GDPR-related deletion requests)
         """
