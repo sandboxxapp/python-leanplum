@@ -13,10 +13,10 @@ with open('LICENSE') as f:
 
 setup(
     name='python-leanplum',
-    version='0.2.0',
+    version='0.2.1',
     description='python leanplum SDK',
     long_description=readme,
-    author='Jessi Li / Eric Pluntze',
+    author='Jesse Li / Eric Pluntze',
     author_email='eric@sandboxx.com',
     url='https://github.com/sandboxxapp/leanplum-python',
     license=license,
