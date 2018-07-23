@@ -39,13 +39,14 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'advance', params)
 
-    def track(self, user_id, event, info, params, create_disposition=disposition.CREATE_NEVER):
+    def track(self, user_id, event, info, time, params, create_disposition=disposition.CREATE_NEVER):
         """
         https://docs.leanplum.com/reference#post_api-action-track
 
         :param user_id: REQUIRED The current user ID
         :param str event: REQUIRED The name of the event
         :param str info: Any info attached to the event
+        :param int time: The UNIX timestamp for when the event occurred, provide to override current time
         :param dict params: A flat object of parameters as key-value pairs.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
@@ -67,6 +68,7 @@ class Users(BaseResource):
             "userId": user_id,
             "event": event,
             "info": info,
+            "time": time,
             "params": params,
             "createDisposition": create_disposition
         }
