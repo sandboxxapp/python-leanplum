@@ -6,7 +6,7 @@ __all__ = ['Users']
 
 class Users(BaseResource):
 
-    def advance(self, user_id, state, info, params, create_disposition=disposition.CREATE_NEVER):
+    def advance(self, user_id, state, info=None, params=None, create_disposition=disposition.CREATE_NEVER):
         """
         https://docs.leanplum.com/reference#post_api-action-advance
 
@@ -20,14 +20,12 @@ class Users(BaseResource):
 
         if not user_id:
             raise ValueError("user_id is a required field")
-        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
-            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
         if not state:
             raise ValueError("state is a required field")
         if not isinstance(state, basestring):
             raise TypeError("state should be type string, got {}".format(type(state)))
 
-        if type(params) is not dict:
+        if params and type(params) is not dict:
             raise TypeError("params must be None or type dict")
 
         params = {
@@ -39,12 +37,13 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'advance', params)
 
-    def track(self, user_id, event, info, time, params, create_disposition=disposition.CREATE_NEVER):
+    def track(self, user_id, event, value=None, info=None, time=None, params=None, create_disposition=disposition.CREATE_NEVER):
         """
         https://docs.leanplum.com/reference#post_api-action-track
 
         :param user_id: REQUIRED The current user ID
         :param str event: REQUIRED The name of the event
+        :param float value: The event value.  For "Purchase" events, the would be the purchase price
         :param str info: Any info attached to the event
         :param int time: The UNIX timestamp for when the event occurred, provide to override current time
         :param dict params: A flat object of parameters as key-value pairs.
@@ -54,19 +53,18 @@ class Users(BaseResource):
 
         if not user_id:
             raise ValueError("user_id is a required field")
-        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
-            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
         if not event:
             raise ValueError("event is a required field")
         if not isinstance(event, basestring):
             raise TypeError("event should be type string, got {}".format(type(event)))
 
-        if type(params) is not dict:
+        if params and type(params) is not dict:
             raise TypeError("params must be None or type dict")
 
         params = {
             "userId": user_id,
             "event": event,
+            "value": value,
             "info": info,
             "time": time,
             "params": params,
@@ -86,8 +84,6 @@ class Users(BaseResource):
 
         if not user_id:
             raise ValueError("user_id is a required field")
-        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
-            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
 
         if type(attributes) is not dict:
             raise ValueError("SetUserAttributes attributes param must be of type dict")
@@ -112,9 +108,6 @@ class Users(BaseResource):
 
         if not user_id:
             raise ValueError("user_id is a required field")
-        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
-            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
-
         if not attribute:
             raise ValueError("attribute is a required field")
         if not isinstance(attribute, basestring):
