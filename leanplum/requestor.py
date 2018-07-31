@@ -52,8 +52,11 @@ class ApiRequestor(object):
     def interpret_response(self, body, code, headers):
         # HTTP responses (error or success) always make it to here.
         # Errors in the transport layer are raised as exceptions before they reach here
-
-        body = json.loads(body)  # slap it in a dictionary
+        try:
+            body = json.loads(body)
+        except ValueError:  # Sometimes requests fail with a 500 and html/text body
+            raise errors.APIError("Error decoding JSON from API response: %r (HTTP response code "
+                                  "was %d)" % (body, code))
 
         response = body.get("response")[0]  # it's in the first index TODO: Support multi blahhhhh
         success = response.get("success")
