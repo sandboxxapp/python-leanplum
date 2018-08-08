@@ -72,12 +72,14 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'track', params)
 
-    def set_user_attributes(self, user_id, attributes, create_disposition=disposition.CREATE_NEVER):
+    def set_user_attributes(self, user_id, attributes, attributes_to_add=None, attributes_to_remove=None, create_disposition=disposition.CREATE_NEVER):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
         :param user_id: REQUIRED The current user ID
         :param dict attributes: A map of user attributes as key-value pairs.
+        :param dict attributes_to_remove: A map of values to add to existing user attribute sets.
+        :param dict attributes_to_add: A map of values to remove from existing user attribute sets.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
         :return: The response from Leanplum api
         """
@@ -91,6 +93,8 @@ class Users(BaseResource):
         params = {
             "userId": user_id,
             "userAttributes": attributes,
+            "userAttributeValuesToAdd": attributes_to_add,
+            "userAttributeValuesToRemove": attributes_to_remove,
             "createDisposition": create_disposition
         }
         return self._client.request('POST', 'setUserAttributes', params)
