@@ -16,8 +16,6 @@ class Admin(BaseResource):
         """
         if not user_id:
             raise ValueError("user_id is a required field")
-        if not isinstance(user_id, basestring) or not isinstance(user_id, int):
-            raise TypeError("user_id should be type string or int, got {}".format(type(user_id)))
 
         params = {
             "userId": user_id,
