@@ -38,3 +38,16 @@ class Client(object):
                              apiVersion=self._api_version,
                              **params)
         return params
+
+    def request_multi(self, method, action, time, data):
+        params = self._format_params_multi(action, time, data)
+        return self._requestor.request(method, params)
+
+    def _format_params_multi(self, action, time, data):
+        params = OrderedDict(action=action,
+                             appId=self._app_id,
+                             clientKey=self._client_key,
+                             apiVersion=self._api_version,
+                             time=time,
+                             data=data)
+        return params
