@@ -12,10 +12,6 @@ class Client(object):
         self._api_version = api_version or leanplum.api_version
         self._requestor = ApiRequestor()
 
-    def request(self, method, action, params):
-        params = self._format_params(action, **params)
-        return self._requestor.request(method, params)
-
     @property
     def users(self):
         from leanplum.actions.users import Users
@@ -25,6 +21,15 @@ class Client(object):
     def admin(self):
         from leanplum.actions.admin import Admin
         return Admin(self)
+
+    @property
+    def multi(self):
+        from leanplum.actions.multi import Multi
+        return Multi(self)
+
+    def request(self, method, action, params):
+        params = self._format_params(action, **params)
+        return self._requestor.request(method, params)
 
     def _format_params(self, action, **params):
         params = OrderedDict(action=action,
