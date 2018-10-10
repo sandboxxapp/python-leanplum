@@ -72,7 +72,8 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'track', params)
 
-    def set_user_attributes(self, user_id, attributes, attributes_to_add=None, attributes_to_remove=None, create_disposition=disposition.CREATE_NEVER):
+    def set_user_attributes(self, user_id=None, attributes=None, attributes_to_add=None, attributes_to_remove=None,
+                            create_disposition=disposition.CREATE_NEVER, **kwargs):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
@@ -81,13 +82,14 @@ class Users(BaseResource):
         :param dict attributes_to_remove: A map of values to add to existing user attribute sets.
         :param dict attributes_to_add: A map of values to remove from existing user attribute sets.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
+        :param kwargs: Any extra params to put on the request.  Note: use camelCase on these params
         :return: The response from Leanplum api
         """
 
         if not user_id:
             raise ValueError("user_id is a required field")
 
-        if type(attributes) is not dict:
+        if attributes and type(attributes) is not dict:
             raise ValueError("SetUserAttributes attributes param must be of type dict")
 
         params = {
@@ -97,6 +99,9 @@ class Users(BaseResource):
             "userAttributeValuesToRemove": attributes_to_remove,
             "createDisposition": create_disposition
         }
+
+        params.update(kwargs)
+
         return self._client.request('POST', 'setUserAttributes', params)
 
     def increment_user_attribute(self, user_id, attribute, incr=1, create_disposition=disposition.CREATE_NEVER):
