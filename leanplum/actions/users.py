@@ -72,7 +72,8 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'track', params)
 
-    def set_user_attributes(self, user_id, attributes, attributes_to_add=None, attributes_to_remove=None, create_disposition=disposition.CREATE_NEVER):
+    def set_user_attributes(self, user_id=None, attributes=None, attributes_to_add=None, attributes_to_remove=None,
+                            create_disposition=disposition.CREATE_NEVER, **kwargs):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
@@ -81,13 +82,14 @@ class Users(BaseResource):
         :param dict attributes_to_remove: A map of values to add to existing user attribute sets.
         :param dict attributes_to_add: A map of values to remove from existing user attribute sets.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
+        :param kwargs: Any extra params to put on the request.  Note: use camelCase on these params
         :return: The response from Leanplum api
         """
 
         if not user_id:
             raise ValueError("user_id is a required field")
 
-        if type(attributes) is not dict:
+        if attributes and type(attributes) is not dict:
             raise ValueError("SetUserAttributes attributes param must be of type dict")
 
         params = {
@@ -97,36 +99,8 @@ class Users(BaseResource):
             "userAttributeValuesToRemove": attributes_to_remove,
             "createDisposition": create_disposition
         }
-        return self._client.request('POST', 'setUserAttributes', params)
 
-    def set_new_user_id(self, user_id, new_user_id):
-        """
-        https://docs.leanplum.com/v1/reference#post_api-action-setuserattributes
-
-        This call can have a few different effects:
-        - Login: If the current user has no user ID and the user given by newUserId already exists,
-        the current and existing user profiles will be merged, and the current profile will be deleted.
-
-        - Register: If there is no current user ID and the user given by newUserId does not exist, the current user
-        will be simply assigned newUserId as its user ID.
-
-        - Switch user: If the current user has a user ID, the current session will be ended and a new session will be
-        started with the user given by newUserId. A user with newUserId will be created if one does not already exist.
-
-        :param user_id: REQUIRED The current user ID
-        :param new_user_id: REQUIRED The new user ID
-        :return: The response from Leanplum api
-        """
-
-        if not user_id:
-            raise ValueError("user_id is a required field")
-        if not new_user_id:
-            raise ValueError("new_user_id is a required field")
-
-        params = {
-            "userId": user_id,
-            "newUserId": new_user_id
-        }
+        params.update(kwargs)
 
         return self._client.request('POST', 'setUserAttributes', params)
 
