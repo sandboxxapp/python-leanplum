@@ -25,7 +25,7 @@ class Users(BaseResource):
         if not isinstance(state, basestring):
             raise TypeError("state should be type string, got {}".format(type(state)))
 
-        if params and type(params) is not dict:
+        if params and not isinstance(params, dict):
             raise TypeError("params must be None or type dict")
 
         params = {
@@ -58,7 +58,7 @@ class Users(BaseResource):
         if not isinstance(event, basestring):
             raise TypeError("event should be type string, got {}".format(type(event)))
 
-        if params and type(params) is not dict:
+        if params and not isinstance(params, dict):
             raise TypeError("params must be None or type dict")
 
         params = {
@@ -89,7 +89,7 @@ class Users(BaseResource):
         if not user_id:
             raise ValueError("user_id is a required field")
 
-        if attributes and type(attributes) is not dict:
+        if attributes and not isinstance(attributes, dict):
             raise ValueError("SetUserAttributes attributes param must be of type dict")
 
         params = {

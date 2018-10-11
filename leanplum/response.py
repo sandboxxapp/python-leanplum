@@ -15,7 +15,7 @@ class ResponseList(object):
     def __init__(self, code, responses):
         self._code = code
         self._responses = []
-        if type(responses) is list:
+        if isinstance(responses, list):
             for item in responses:
                 self._responses.append(Response(item))
         else:
