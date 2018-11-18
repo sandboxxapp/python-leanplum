@@ -53,7 +53,7 @@ class ApiRequestor(object):
         # HTTP responses (error or success) always make it to here.
         # Errors in the transport layer are raised as exceptions before they reach here
         try:
-            body = json.loads(body)
+            body = json.loads(body.decode('utf-8'))
         except ValueError:  # Sometimes requests fail with a 500 and html/text body
             raise errors.APIError("Error decoding JSON from API response: %r (HTTP response code "
                                   "was %d)" % (body, code))
