@@ -30,7 +30,7 @@ class ApiRequestor(object):
         abs_url = url
         post_data = None
         if method == 'get':
-            abs_url = "{}&{}".format(url, self._encode_query_params(params))
+            abs_url = "{}?{}".format(url, self._encode_query_params(params))
         elif method == 'post':
             if headers['Content-Type'] == 'application/json':
                 post_data = json.dumps(params)
