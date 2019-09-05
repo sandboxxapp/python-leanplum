@@ -40,4 +40,4 @@ class Admin(BaseResource):
             "userId": user_id
         }
 
-        self._client.request('GET', 'exportUser', params)
+        return self._client.request('GET', 'exportUser', params)
