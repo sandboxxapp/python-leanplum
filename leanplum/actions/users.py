@@ -22,7 +22,7 @@ class Users(BaseResource):
             raise ValueError("user_id is a required field")
         if not state:
             raise ValueError("state is a required field")
-        if not isinstance(state, basestring):
+        if not isinstance(state, str):
             raise TypeError("state should be type string, got {}".format(type(state)))
 
         if params and not isinstance(params, dict):
@@ -55,7 +55,7 @@ class Users(BaseResource):
             raise ValueError("user_id is a required field")
         if not event:
             raise ValueError("event is a required field")
-        if not isinstance(event, basestring):
+        if not isinstance(event, str):
             raise TypeError("event should be type string, got {}".format(type(event)))
 
         if params and not isinstance(params, dict):
@@ -119,7 +119,7 @@ class Users(BaseResource):
             raise ValueError("user_id is a required field")
         if not attribute:
             raise ValueError("attribute is a required field")
-        if not isinstance(attribute, basestring):
+        if not isinstance(attribute, str):
             raise TypeError("attribute should be type string, got {}".format(type(attribute)))
         if not isinstance(incr, int):
             raise TypeError("incr should be type int, got {}".format(type(incr)))

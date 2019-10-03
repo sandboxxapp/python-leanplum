@@ -3,6 +3,9 @@
 
 A small python wrapper around Leanplum API (https://docs.leanplum.com/reference#api-introduction)
 
+## Version Compatability
+ - 0.5.x - Python 3
+ - 0.4.x - Python 2
 ## Usage
 
 ```
