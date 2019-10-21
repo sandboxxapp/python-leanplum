@@ -1,7 +1,5 @@
 import logging
 
-logging.basicConfig()  # dunno why, this makes it work in iPython (https://stackoverflow.com/a/44188369/6460591)
-
 __all__ = ["Logger"]
 
 
