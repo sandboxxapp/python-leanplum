@@ -11,7 +11,7 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-advance
 
         :param user_id: REQUIRED The current user ID
-        :param str, state: REQUIRED The name of the state
+        :param str state: REQUIRED The name of the state
         :param str info: Any info attached to the state.
         :param dict params: A flat object of parameters as key-value pairs.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
@@ -72,12 +72,13 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'track', params)
 
-    def set_user_attributes(self, user_id=None, attributes=None, attributes_to_add=None, attributes_to_remove=None,
+    def set_user_attributes(self, user_id=None, new_user_id=None, attributes=None, attributes_to_add=None, attributes_to_remove=None,
                             create_disposition=disposition.CREATE_NEVER, **kwargs):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
         :param user_id: REQUIRED The current user ID
+        :param new_user_id: The new user ID to update this user with
         :param dict attributes: A map of user attributes as key-value pairs.
         :param dict attributes_to_remove: A map of values to add to existing user attribute sets.
         :param dict attributes_to_add: A map of values to remove from existing user attribute sets.
@@ -94,6 +95,7 @@ class Users(BaseResource):
 
         params = {
             "userId": user_id,
+            "newUserId": new_user_id,
             "userAttributes": attributes,
             "userAttributeValuesToAdd": attributes_to_add,
             "userAttributeValuesToRemove": attributes_to_remove,
