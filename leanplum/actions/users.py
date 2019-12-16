@@ -11,7 +11,7 @@ class Users(BaseResource):
         https://docs.leanplum.com/reference#post_api-action-advance
 
         :param user_id: REQUIRED The current user ID
-        :param str, state: REQUIRED The name of the state
+        :param str state: REQUIRED The name of the state
         :param str info: Any info attached to the state.
         :param dict params: A flat object of parameters as key-value pairs.
         :param str create_disposition: The policy that determines whether users are created by the API. Default: CreateNever
@@ -37,7 +37,7 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'advance', params)
 
-    def track(self, user_id: str, event, value=None, info=None, time=None, params=None, create_disposition=disposition.CREATE_NEVER):
+    def track(self, user_id, event, value=None, info=None, time=None, params=None, create_disposition=disposition.CREATE_NEVER):
         """
         https://docs.leanplum.com/reference#post_api-action-track
 
@@ -72,8 +72,7 @@ class Users(BaseResource):
         }
         return self._client.request('POST', 'track', params)
 
-    def set_user_attributes(self, user_id: str,  new_user_id: str = None,
-                            attributes: dict = None, attributes_to_add: dict = None, attributes_to_remove: dict = None,
+    def set_user_attributes(self, user_id=None, new_user_id=None, attributes=None, attributes_to_add=None, attributes_to_remove=None,
                             create_disposition=disposition.CREATE_NEVER, **kwargs):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
