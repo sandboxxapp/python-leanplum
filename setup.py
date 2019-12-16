@@ -13,7 +13,7 @@ with open('LICENSE') as f:
 
 setup(
     name='python-leanplum',
-    version='0.5.0',
+    version='0.6.0',
     description='python leanplum SDK',
     long_description=readme,
     author='Jesse Li / Eric Pluntze / Tim Chen',

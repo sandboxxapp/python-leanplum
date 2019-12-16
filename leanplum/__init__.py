@@ -1,6 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 # errors
 # TODO: Remove from global namespace
