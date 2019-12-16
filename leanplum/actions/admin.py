@@ -9,6 +9,8 @@ class Admin(BaseResource):
         """
         https://docs.leanplum.com/reference#post_api-action-setuserattributes
 
+        * The Development Key is used in place of the regular client_key
+
         :param user_id: REQUIRED The current user ID
         :param bool full_erasure:
         :return: If True, deletes all session and analytics data for the selected user (set True
