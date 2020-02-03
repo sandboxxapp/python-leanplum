@@ -1,6 +1,6 @@
 import json
 import platform
-import urllib
+import urllib.parse
 
 import leanplum
 from leanplum import errors, http_client, logger
@@ -132,13 +132,6 @@ class ApiRequestor(object):
 
         return headers
 
-    def _get_authorizations(self, app_id, api_key):
-        return {
-            "appId": app_id,
-            "clientKey": api_key,
-            "apiVersion": self.api_version
-        }
-
     @staticmethod
     def _encode_query_params(params):
-        return urllib.urlencode(params)
+        return urllib.parse.urlencode(params)
